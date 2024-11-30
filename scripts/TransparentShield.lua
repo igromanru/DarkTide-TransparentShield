@@ -7,9 +7,13 @@
 local mod = get_mod("TransparentShield")
 local SettingNames = mod:io_dofile("TransparentShield/scripts/setting_names")
 
-local game_started = false
 local cooldown = 0.0 ---@type number
 local last_weapon_unit = nil ---@type Unit
+
+---@return boolean
+local function is_mod_enabled()
+    return mod:get(SettingNames.EnableMod)
+end
 
 ---@param is_blocking boolean? # Default: `false`
 ---@return number
@@ -79,7 +83,7 @@ end
 ---@return HumanPlayer?
 local function get_local_player()
     if not Managers.player then return nil end
-    return Managers.player:local_player(1)
+    return Managers.player:local_player_safe(1)
 end
 
 ---@return Unit?
@@ -89,7 +93,7 @@ local function get_local_player_unit()
 end
 
 mod:hook_safe(CLASS.PlayerUnitWeaponExtension, "on_slot_wielded", function(self, slot_name, t, skip_wield_action)
-    if not mod:get(SettingNames.EnableMod) or not self._weapons or slot_name ~= "slot_primary" or self._player ~= get_local_player() then return end
+    if not is_mod_enabled() or not self._weapons or slot_name ~= "slot_primary" or self._player ~= get_local_player() then return end
 
     local weapon = self._weapons[slot_name]
     if weapon and weapon.weapon_template then
@@ -103,18 +107,10 @@ end)
 
 ---@param setting_id string
 function mod.on_setting_changed(setting_id)
-    if mod:get(SettingNames.EnableMod) then
+    if is_mod_enabled() then
         set_weapon_fade(last_weapon_unit)
     elseif setting_id == SettingNames.EnableMod then
         remove_weapon_fade(last_weapon_unit)
-    end
-end
-
----@param status string
----@param state_name string
-function mod.on_game_state_changed(status, state_name)
-    if status == "enter" and state_name == "StateIngame" then
-        game_started = true
     end
 end
 
@@ -124,7 +120,7 @@ function mod.update(dt)
         cooldown = cooldown - dt
     else
         cooldown = 0.25
-        if game_started and mod:get(SettingNames.EnableMod) then
+        if is_mod_enabled() then
             local local_player_unit = get_local_player_unit()
             if local_player_unit then
                 local unit_data_system_ext = ScriptUnit.has_extension(local_player_unit, "unit_data_system")
