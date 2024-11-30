@@ -19,6 +19,11 @@ return {
 				default_value = true
 			},
 			{
+				setting_id = SettingNames.BlockOnly,
+				type = "checkbox",
+				default_value = false
+			},
+			{
 				setting_id = SettingNames.Opacity,
 				type = "numeric",
 				default_value = 0.8,

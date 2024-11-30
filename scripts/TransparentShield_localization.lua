@@ -19,6 +19,9 @@ return {
   [SettingNames.EnableMod] = {
     en = "Enable transparency"
   },
+  [SettingNames.BlockOnly] = {
+    en = "Only while blocking"
+  },
   [SettingNames.Opacity] = {
     en = "Opacity"
   },
