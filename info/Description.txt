@@ -1,0 +1,20 @@
+[font=Verdana][size=4][b]Description[/b][/size][/font]
+Simple mod that makes Ogryn's Slab Shield transparent. You can choose the opacity in mod's options.
+[size=2]Good for people with claustrophobia.[/size]
+
+[font=Verdana][size=4][b]Requirements[/b][/size][/font]
+[size=3]- [url=https://www.nexusmods.com/warhammer40kdarktide/mods/19]Darktide Mod Loader[/url]
+- [url=https://www.nexusmods.com/warhammer40kdarktide/mods/8]Darktide Mod Framework[/url][/size]
+
+[font=Verdana][size=4][b]Installation[/b][/size][/font]
+1. Read descriptions and install [url=https://www.nexusmods.com/warhammer40kdarktide/mods/19]Darktide Mod Loader[/url] and [url=https://www.nexusmods.com/warhammer40kdarktide/mods/8]Darktide Mod Framework[/url]
+2. In [b]Files[/b] tab use the [b]Mod Manager Download[/b] button to install the mod with [url=https://www.nexusmods.com/about/vortex/]Vortex[/url].
+3. Make sure the mod is enabled in Vortex's [b]Load Order[/b] tab.
+4. Done.
+
+
+[b][url=https://github.com/igromanru/DarkTide-TransparentShield]GitHub Page[/url][/b]
+
+[font=Arial][size=4]Highest form of appreciation[/size][/font]
+[size=2]If you like my work and feel generous, you can support me.[/size]
+[url=https://ko-fi.com/igromanru][img]https://i.imgur.com/rGcPxK8.png[/img][/url]
