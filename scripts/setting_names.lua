@@ -7,6 +7,7 @@
 ---@enum SettingNames
 local SettingNames = {
 	EnableMod = "enable_mod",
+    Opacity  = "opacity",
 }
 
 return SettingNames

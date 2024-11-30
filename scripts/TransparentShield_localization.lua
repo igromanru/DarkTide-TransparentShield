@@ -17,6 +17,9 @@ return {
     en = "Makes Ogryn shield transparent",
   },
   [SettingNames.EnableMod] = {
-    en = "Enable"
+    en = "Enable transparency"
+  },
+  [SettingNames.Opacity] = {
+    en = "Opacity"
   },
 }

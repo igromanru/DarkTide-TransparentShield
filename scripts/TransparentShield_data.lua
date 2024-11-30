@@ -18,6 +18,13 @@ return {
 				type = "checkbox",
 				default_value = true
 			},
+			{
+				setting_id = SettingNames.Opacity,
+				type = "numeric",
+				default_value = 0.8,
+				range = {0.0, 1.0},
+				decimals_number = 2
+			},
 		}
 	},
 }
