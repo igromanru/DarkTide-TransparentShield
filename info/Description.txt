@@ -12,6 +12,11 @@ Simple mod that makes Ogryn's Slab Shield transparent. You can choose the opacit
 3. Make sure the mod is enabled in Vortex's [b]Load Order[/b] tab.
 4. Done.
 
+[font=Verdana][size=4][b]Report Bugs[/b][/size][/font]
+[size=2]After changing mod's option, the changes should take effect at the latest after switching to another weapon and back to the shield.[/size]
+If you spot any problems or inconsistency with the mod.
+Please write a comment or create a bug report and try to describe as well as possible how the problem can be reproduced.
+
 
 [b][url=https://github.com/igromanru/DarkTide-TransparentShield]GitHub Page[/url][/b]
 
