@@ -17,12 +17,12 @@ return {
     en = "Makes Ogryn shield transparent",
   },
   [SettingNames.EnableMod] = {
-    en = "Enable transparency"
-  },
-  [SettingNames.BlockOnly] = {
-    en = "Only while blocking"
+    en = "Enable Transparency"
   },
   [SettingNames.Opacity] = {
     en = "Opacity"
+  },
+  [SettingNames.BlockOpacity] = {
+    en = "Opacity while blocking"
   },
 }
