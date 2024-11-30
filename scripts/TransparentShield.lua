@@ -7,6 +7,7 @@
 local mod = get_mod("TransparentShield")
 local SettingNames = mod:io_dofile("TransparentShield/scripts/setting_names")
 
+local game_started = false
 local cooldown = 0.0 ---@type number
 local last_weapon_unit = nil ---@type Unit
 
@@ -109,13 +110,21 @@ function mod.on_setting_changed(setting_id)
     end
 end
 
+---@param status string
+---@param state_name string
+function mod.on_game_state_changed(status, state_name)
+    if status == "enter" and state_name == "StateIngame" then
+        game_started = true
+    end
+end
+
 ---@param dt number # delta time
 function mod.update(dt)
     if cooldown > 0 then
         cooldown = cooldown - dt
     else
         cooldown = 0.25
-        if mod:get(SettingNames.EnableMod) then
+        if game_started and mod:get(SettingNames.EnableMod) then
             local local_player_unit = get_local_player_unit()
             if local_player_unit then
                 local unit_data_system_ext = ScriptUnit.has_extension(local_player_unit, "unit_data_system")
