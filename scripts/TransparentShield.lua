@@ -2,7 +2,7 @@
     Author: Igromanru
     Date: 30.11.2024
     Mod Name: Transparent Shield
-    Version: 1.0.0
+    Version: 1.0.1
 ]]
 local mod = get_mod("TransparentShield")
 local SettingNames = mod:io_dofile("TransparentShield/scripts/setting_names")
@@ -50,8 +50,13 @@ local function set_weapon_fade(weapon_unit)
     end
 end
 
+local function get_local_player()
+    if not Managers.player then return nil end
+	return Managers.player:local_player(1)
+end
+
 mod:hook_safe(CLASS.PlayerUnitWeaponExtension, "on_slot_wielded", function(self, slot_name, t, skip_wield_action)
-    if not mod:get(SettingNames.EnableMod) or not self._weapons or slot_name ~= "slot_primary" then return end
+    if not mod:get(SettingNames.EnableMod) or not self._weapons or slot_name ~= "slot_primary" or self._player ~= get_local_player() then return end
 
     local weapon = self._weapons[slot_name]
     if weapon and weapon.weapon_template then
