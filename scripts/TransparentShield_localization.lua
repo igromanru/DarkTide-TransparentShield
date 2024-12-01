@@ -25,4 +25,7 @@ return {
   [SettingNames.BlockOpacity] = {
     en = "Opacity while blocking"
   },
+  [SettingNames.EnableForAll] = {
+    en = "Enable for all weapons"
+  },
 }

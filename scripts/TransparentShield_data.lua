@@ -32,6 +32,11 @@ return {
 				range = {0.0, 1.0},
 				decimals_number = 2
 			},
+			{
+				setting_id = SettingNames.EnableForAll,
+				type = "checkbox",
+				default_value = false
+			},
 		}
 	},
 }

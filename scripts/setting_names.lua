@@ -9,6 +9,7 @@ local SettingNames = {
 	EnableMod = "enable_mod",
     Opacity = "opacity",
     BlockOpacity = "block_opacity",
+    EnableForAll = "enable_for_all",
 }
 
 return SettingNames

@@ -2,7 +2,7 @@
     Author: Igromanru
     Date: 30.11.2024
     Mod Name: Transparent Shield
-    Version: 1.2.0
+    Version: 1.3.0
 ]]
 local mod = get_mod("TransparentShield")
 local SettingNames = mod:io_dofile("TransparentShield/scripts/setting_names")
@@ -13,6 +13,11 @@ local last_weapon_unit = nil ---@type Unit
 ---@return boolean
 local function is_mod_enabled()
     return mod:get(SettingNames.EnableMod)
+end
+
+---@return boolean
+local function is_for_all_weapons()
+    return mod:get(SettingNames.EnableForAll)
 end
 
 ---@param is_blocking boolean? # Default: `false`
@@ -93,14 +98,20 @@ local function get_local_player_unit()
 end
 
 mod:hook_safe(CLASS.PlayerUnitWeaponExtension, "on_slot_wielded", function(self, slot_name, t, skip_wield_action)
-    if not is_mod_enabled() or not self._weapons or slot_name ~= "slot_primary" or self._player ~= get_local_player() then return end
+    if not is_mod_enabled() or not self._weapons or self._player ~= get_local_player() then return end
 
     local weapon = self._weapons[slot_name]
     if weapon and weapon.weapon_template then
-        local weapon_name = weapon.weapon_template.name
-        if weapon_name and string.find(string.lower(weapon_name), "slabshield") then
-            last_weapon_unit = weapon.weapon_unit
-            -- set_weapon_fade(last_weapon_unit)
+        if is_for_all_weapons() then
+            if slot_name == "slot_primary" or slot_name == "slot_secondary" then 
+                last_weapon_unit = weapon.weapon_unit
+            end
+        elseif slot_name == "slot_primary" then 
+            local weapon_name = weapon.weapon_template.name
+            if weapon_name and string.find(string.lower(weapon_name), "slabshield") then
+                last_weapon_unit = weapon.weapon_unit
+                -- set_weapon_fade(last_weapon_unit)
+            end
         end
     end
 end)
