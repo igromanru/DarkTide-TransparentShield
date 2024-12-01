@@ -100,7 +100,7 @@ mod:hook_safe(CLASS.PlayerUnitWeaponExtension, "on_slot_wielded", function(self,
         local weapon_name = weapon.weapon_template.name
         if weapon_name and string.find(string.lower(weapon_name), "slabshield") then
             last_weapon_unit = weapon.weapon_unit
-            set_weapon_fade(last_weapon_unit)
+            -- set_weapon_fade(last_weapon_unit)
         end
     end
 end)
