@@ -8,7 +8,7 @@ local mod = get_mod("TransparentShield")
 local SettingNames = mod:io_dofile("TransparentShield/scripts/setting_names")
 
 local cooldown = 0.0 ---@type number
-local last_weapon_unit = nil ---@type Unit
+local last_weapon_unit = nil ---@type Unit?
 
 ---@return boolean
 local function is_mod_enabled()
@@ -51,7 +51,7 @@ local function get_fade_strength(is_blocking)
     return opacity_to_fade_strength(get_opacity_setting(is_blocking))
 end
 
----@param weapon_unit Unit
+---@param weapon_unit Unit?
 ---@param fade_strength number?
 local function set_weapon_fade(weapon_unit, fade_strength)
     weapon_unit = weapon_unit or last_weapon_unit
@@ -73,7 +73,7 @@ local function set_weapon_fade(weapon_unit, fade_strength)
     end
 end
 
----@param weapon_unit Unit
+---@param weapon_unit Unit?
 ---@param fade_system FadeSystem?
 local function remove_weapon_fade(weapon_unit, fade_system)
     if not weapon_unit or not Unit.alive(weapon_unit) then return end
@@ -83,7 +83,6 @@ local function remove_weapon_fade(weapon_unit, fade_system)
         pcall(fade_system.on_remove_extension, fade_system, weapon_unit)
     end
 end
-
 
 ---@return HumanPlayer?
 local function get_local_player()
@@ -97,31 +96,15 @@ local function get_local_player_unit()
     return local_player and local_player.player_unit
 end
 
-mod:hook_safe(CLASS.PlayerUnitWeaponExtension, "on_slot_wielded", function(self, slot_name, t, skip_wield_action)
-    if not is_mod_enabled() or not self._weapons or self._player ~= get_local_player() then return end
-
-    local weapon = self._weapons[slot_name]
-    if weapon and weapon.weapon_template then
-        if is_for_all_weapons() then
-            if slot_name == "slot_primary" or slot_name == "slot_secondary" then 
-                last_weapon_unit = weapon.weapon_unit
-            end
-        elseif slot_name == "slot_primary" then 
-            local weapon_name = weapon.weapon_template.name
-            if weapon_name and string.find(string.lower(weapon_name), "slabshield") then
-                last_weapon_unit = weapon.weapon_unit
-                -- set_weapon_fade(last_weapon_unit)
-            end
-        end
-    end
-end)
+local function reset()
+    remove_weapon_fade(last_weapon_unit)
+    last_weapon_unit = nil
+end
 
 ---@param setting_id string
 function mod.on_setting_changed(setting_id)
-    if is_mod_enabled() then
-        set_weapon_fade(last_weapon_unit)
-    elseif setting_id == SettingNames.EnableMod then
-        remove_weapon_fade(last_weapon_unit)
+    if setting_id == SettingNames.EnableMod and not is_mod_enabled() then
+        reset()
     end
 end
 
@@ -147,3 +130,22 @@ function mod.update(dt)
         end
     end
 end
+
+mod:hook_safe(CLASS.PlayerUnitWeaponExtension, "on_slot_wielded", function(self, slot_name, t, skip_wield_action)
+    if not is_mod_enabled() or not self._weapons or self._player ~= get_local_player() then return end
+
+    local weapon = self._weapons[slot_name]
+    if weapon and weapon.weapon_template then
+        if is_for_all_weapons() then
+            if slot_name == "slot_primary" or slot_name == "slot_secondary" then 
+                last_weapon_unit = weapon.weapon_unit
+            end
+        elseif slot_name == "slot_primary" then 
+            local weapon_name = weapon.weapon_template.name
+            if weapon_name and string.find(string.lower(weapon_name), "slabshield") then
+                last_weapon_unit = weapon.weapon_unit
+                -- set_weapon_fade(last_weapon_unit)
+            end
+        end
+    end
+end)
