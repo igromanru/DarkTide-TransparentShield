@@ -103,7 +103,7 @@ end
 
 ---@param setting_id string
 function mod.on_setting_changed(setting_id)
-    if setting_id == SettingNames.EnableMod and not is_mod_enabled() then
+    if (setting_id == SettingNames.EnableMod and not is_mod_enabled()) or (setting_id == SettingNames.EnableForAll and not is_for_all_weapons()) then
         reset()
     end
 end
