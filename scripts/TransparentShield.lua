@@ -131,7 +131,10 @@ function mod.update(dt)
         cooldown = cooldown - dt
     else
         cooldown = 0.25
-        if is_mod_enabled() then
+        if is_mod_enabled() and last_weapon_unit then
+            if not Unit.alive(last_weapon_unit) then
+                last_weapon_unit = nil
+            end
             local local_player_unit = get_local_player_unit()
             if local_player_unit then
                 local unit_data_system_ext = ScriptUnit.has_extension(local_player_unit, "unit_data_system")
