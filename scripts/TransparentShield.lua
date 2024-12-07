@@ -60,7 +60,7 @@ end
 
 ---@param setting_id string
 function mod.on_setting_changed(setting_id)
-    if (setting_id == SettingNames.EnableMod or setting_id == SettingNames.EnableForAllWeapons) and not mod:get(setting_id) then
+    if (setting_id == SettingNames.EnableMod or setting_id == SettingNames.EnableForAllItems) and not mod:get(setting_id) then
         reset()
     end
 end
@@ -93,10 +93,10 @@ mod:hook_safe(CLASS.PlayerUnitWeaponExtension, "on_slot_wielded", function(self,
 
     local weapon = self._weapons[slot_name]
     if weapon and weapon.weapon_template then
-        if ModUtils.is_for_all_weapons() then
-            if slot_name == "slot_primary" or slot_name == "slot_secondary" then 
-                last_weapon_unit = weapon.weapon_unit
-            end
+        if ModUtils.is_for_all_items() then
+            -- if slot_name == "slot_primary" or slot_name == "slot_secondary" then 
+            last_weapon_unit = weapon.weapon_unit
+            -- end
         elseif slot_name == "slot_primary" then 
             local weapon_name = weapon.weapon_template.name
             if weapon_name and string.find(string.lower(weapon_name), "slabshield") then

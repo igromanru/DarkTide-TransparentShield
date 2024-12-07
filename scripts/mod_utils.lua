@@ -10,8 +10,8 @@ function ModUtils.is_mod_enabled()
 end
 
 ---@return boolean
-function ModUtils.is_for_all_weapons()
-    return mod:get(SettingNames.EnableForAllWeapons)
+function ModUtils.is_for_all_items()
+    return mod:get(SettingNames.EnableForAllItems)
 end
 
 ---@param is_blocking boolean? # Default: `false`
