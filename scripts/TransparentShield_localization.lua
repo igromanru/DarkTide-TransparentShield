@@ -5,7 +5,7 @@
 ]]
 local mod = get_mod("TransparentShield")
 
-local SettingNames = mod:io_dofile("TransparentShield/scripts/setting_names")
+local SettingNames = mod:io_dofile("TransparentShield/scripts/setting_names") ---@type SettingNames
 
 return {
   mod_name =
@@ -28,7 +28,16 @@ return {
   [SettingNames.EnableForAllWeapons] = {
     en = "Enable for all weapons"
   },
-  [SettingNames.EnableForAllPlayers] = {
-    en = "Enable for all players"
+  [SettingNames.OtherPlayersGroup] = {
+    en = "Settings for other players"
+  },
+  [SettingNames.EnableForOtherPlayers] = {
+    en = "Enable for other players"
+  },
+  [SettingNames.OpacityForOthers] = {
+    en = "Opacity for other players"
+  },
+  [SettingNames.BlockOpacityForOthers] = {
+    en = "Opacity while blocking for other players"
   },
 }

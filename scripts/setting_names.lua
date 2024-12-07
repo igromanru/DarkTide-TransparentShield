@@ -10,7 +10,10 @@ local SettingNames = {
     Opacity = "opacity",
     BlockOpacity = "block_opacity",
     EnableForAllWeapons = "enable_for_all_weapons",
-    EnableForAllPlayers = "enable_for_all_players",
+    OtherPlayersGroup = "other_players_group",
+    EnableForOtherPlayers = "enable_for_other_players",
+    OpacityForOthers = "opacity_for_others",
+    BlockOpacityForOthers = "block_opacity_for_others",
 }
 
 return SettingNames
