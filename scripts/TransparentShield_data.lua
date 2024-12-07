@@ -33,7 +33,12 @@ return {
 				decimals_number = 2
 			},
 			{
-				setting_id = SettingNames.EnableForAll,
+				setting_id = SettingNames.EnableForAllWeapons,
+				type = "checkbox",
+				default_value = false
+			},
+			{
+				setting_id = SettingNames.EnableForAllPlayers,
 				type = "checkbox",
 				default_value = false
 			},

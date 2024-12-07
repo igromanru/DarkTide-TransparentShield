@@ -9,7 +9,8 @@ local SettingNames = {
 	EnableMod = "enable_mod",
     Opacity = "opacity",
     BlockOpacity = "block_opacity",
-    EnableForAll = "enable_for_all",
+    EnableForAllWeapons = "enable_for_all_weapons",
+    EnableForAllPlayers = "enable_for_all_players",
 }
 
 return SettingNames

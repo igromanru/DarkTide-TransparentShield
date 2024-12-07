@@ -10,6 +10,15 @@ local SettingNames = mod:io_dofile("TransparentShield/scripts/setting_names")
 local cooldown = 0.0 ---@type number
 local last_weapon_unit = nil ---@type Unit?
 
+---@class WeaponInfo
+---@field unit Unit
+---@field alpha number
+---@field alpha_blocking number
+local WeaponInfo = {}
+
+---@type { [string]: WeaponInfo }
+local weapons_cache = {}
+
 ---@return boolean
 local function is_mod_enabled()
     return mod:get(SettingNames.EnableMod)
@@ -17,7 +26,7 @@ end
 
 ---@return boolean
 local function is_for_all_weapons()
-    return mod:get(SettingNames.EnableForAll)
+    return mod:get(SettingNames.EnableForAllWeapons)
 end
 
 ---@param is_blocking boolean? # Default: `false`
@@ -103,7 +112,7 @@ end
 
 ---@param setting_id string
 function mod.on_setting_changed(setting_id)
-    if (setting_id == SettingNames.EnableMod or setting_id == SettingNames.EnableForAll) and not mod:get(setting_id) then
+    if (setting_id == SettingNames.EnableMod or setting_id == SettingNames.EnableForAllWeapons) and not mod:get(setting_id) then
         reset()
     end
 end
