@@ -11,15 +11,6 @@ local ModUtils = mod:io_dofile("TransparentShield/scripts/mod_utils") ---@type M
 local cooldown = 0.0 ---@type number
 local last_weapon_unit = nil ---@type Unit?
 
--- ---@class WeaponInfo
--- ---@field unit Unit
--- ---@field alpha number
--- ---@field alpha_blocking number
--- local WeaponInfo = {}
-
--- ---@type { [string]: WeaponInfo }
--- local weapons_cache = {}
-
 ---@param weapon_unit Unit?
 ---@param fade_strength number?
 local function set_weapon_fade(weapon_unit, fade_strength)
@@ -93,6 +84,7 @@ mod:hook_safe(CLASS.PlayerUnitWeaponExtension, "on_slot_wielded", function(self,
 
     local weapon = self._weapons[slot_name]
     if weapon and weapon.weapon_template then
+        -- mod:echo("id: %s", Unit.id_string(weapon.weapon_unit))
         if ModUtils.is_for_all_items() then
             -- if slot_name == "slot_primary" or slot_name == "slot_secondary" then 
             last_weapon_unit = weapon.weapon_unit

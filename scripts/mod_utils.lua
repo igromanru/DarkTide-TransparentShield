@@ -14,13 +14,40 @@ function ModUtils.is_for_all_items()
     return mod:get(SettingNames.EnableForAllItems)
 end
 
----@param is_blocking boolean? # Default: `false`
+---@return boolean
+function ModUtils.is_for_all_players()
+    return mod:get(SettingNames.EnableForOtherPlayers)
+end
+
+---@param other_players boolean? # Default: `false`
 ---@return number
-function ModUtils.get_opacity_setting(is_blocking)
-    if is_blocking then
-        return mod:get(SettingNames.BlockOpacity)
+function ModUtils.is_opacity(other_players)
+    other_players = other_players or false
+    if other_players then
+        return mod:get(SettingNames.OpacityForOthers)
     end
     return mod:get(SettingNames.Opacity)
+end
+
+---@param other_players boolean? # Default: `false`
+---@return number
+function ModUtils.is_block_opacity(other_players)
+    other_players = other_players or false
+    if other_players then
+        return mod:get(SettingNames.BlockOpacityForOthers)
+    end
+    return mod:get(SettingNames.BlockOpacity)
+end
+
+---@param is_blocking boolean? # Default: `false`
+---@param other_players boolean? # Default: `false`
+---@return number
+function ModUtils.get_opacity_setting(is_blocking, other_players)
+    other_players = other_players or false
+    if is_blocking then
+        return ModUtils.is_block_opacity(other_players)
+    end
+    return ModUtils.is_opacity(other_players)
 end
 
 ---@param opacity number? # Default value `get_opacity_setting()`. 1.0 = max visibility, 0.0 = invisible
@@ -55,6 +82,26 @@ end
 function ModUtils.get_local_player_unit()
     local local_player = ModUtils.get_local_player()
     return local_player and local_player.player_unit
+end
+
+---@param player_unit Unit? # Default: local player unit
+---@return table? read_block_component
+function ModUtils.get_block_component(player_unit)
+    player_unit = player_unit or ModUtils.get_local_player_unit()
+    if player_unit then
+        local unit_data_system_ext = ScriptUnit.has_extension(player_unit, "unit_data_system")
+        if unit_data_system_ext then
+            return unit_data_system_ext:read_component("block")
+        end
+    end
+    return nil
+end
+
+---@param player_unit Unit? # Default: local player unit
+---@return boolean is_blocking
+function ModUtils.is_player_blocking(player_unit)
+    local block_component = ModUtils.get_block_component(player_unit)
+    return block_component ~= nil and block_component.is_blocking == true
 end
 
 return ModUtils
