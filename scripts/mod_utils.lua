@@ -4,6 +4,12 @@ local SettingNames = mod:io_dofile("TransparentShield/scripts/setting_names") --
 ---@class ModUtils
 local ModUtils = {}
 
+local function round(value)
+    value = value or 0
+    value = value * 100
+    return math.floor(value) / 100
+end
+
 ---@return boolean
 function ModUtils.is_mod_enabled()
     return mod:get(SettingNames.EnableMod)
@@ -55,15 +61,17 @@ end
 function ModUtils.opacity_to_fade_strength(opacity)
     opacity = opacity or ModUtils.get_opacity_setting()
     if type(opacity) == "number" and opacity >= 0.0 and opacity <= 1.0 then
-        return 1.0 - opacity
+        return round(1.0 - opacity)
     end
     return 0.0
 end
 
 ---@param is_blocking boolean? # Default: false
+---@param is_not_local_player boolean? # Default: `false`
 ---@return number fade_strength # 0.0 max visibility, 1.0 = invisible
-function ModUtils.get_fade_strength(is_blocking)
-    return ModUtils.opacity_to_fade_strength(ModUtils.get_opacity_setting(is_blocking))
+function ModUtils.get_fade_strength(is_blocking, is_not_local_player)
+    is_not_local_player = is_not_local_player or false
+    return ModUtils.opacity_to_fade_strength(ModUtils.get_opacity_setting(is_blocking, is_not_local_player))
 end
 
 ---@return FadeSystem?

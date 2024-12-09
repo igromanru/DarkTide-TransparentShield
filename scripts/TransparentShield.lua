@@ -7,6 +7,7 @@
 local mod = get_mod("TransparentShield")
 local SettingNames = mod:io_dofile("TransparentShield/scripts/setting_names") ---@type SettingNames
 local ModUtils = mod:io_dofile("TransparentShield/scripts/mod_utils") ---@type ModUtils
+local ItemFadeManager = mod:io_dofile("TransparentShield/scripts/item_fade_manager") ---@type ItemFadeManager
 
 local cooldown = 0.0 ---@type number
 local last_weapon_unit = nil ---@type Unit?
@@ -81,7 +82,7 @@ end
 
 mod:hook_safe(CLASS.PlayerUnitWeaponExtension, "on_slot_wielded", function(self, slot_name, t, skip_wield_action)
     if not ModUtils.is_mod_enabled() or not self._weapons or self._player ~= ModUtils.get_local_player() then return end
-
+    
     local weapon = self._weapons[slot_name]
     if weapon and weapon.weapon_template then
         -- mod:echo("id: %s", Unit.id_string(weapon.weapon_unit))
