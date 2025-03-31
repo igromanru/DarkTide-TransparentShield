@@ -7,4 +7,4 @@
 ![Options](./info/ModOptions.jpg)
 
 ### Credits
-- [xsSplater](https://github.com/xsSplater) for Russian localisation
+- [xsSplater](https://github.com/xsSplater) for help with Russian localization

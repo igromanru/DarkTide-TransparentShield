@@ -10,8 +10,7 @@ local SettingNames = mod:io_dofile("TransparentShield/scripts/setting_names") --
 return {
   mod_name =
   {
-    en = "Transparent Shield",
-    ru = "Прозрачный щит",
+    en = "Transparent Shield"
   },
   mod_description =
   {
