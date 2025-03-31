@@ -5,3 +5,6 @@
 ## Preview
 ![80%](./info/Preview1.jpg)
 ![Options](./info/ModOptions.jpg)
+
+### Credits
+- [xsSplater](https://github.com/xsSplater) for Russian localisation

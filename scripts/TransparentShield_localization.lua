@@ -16,7 +16,7 @@ return {
   mod_description =
   {
     en = "Makes Ogryn shield transparent",
-    ru = "Transparent Shield - делает щит огрина прозрачным",
+    ru = "Делает щит огрина прозрачным",
   },
   [SettingNames.EnableMod] = {
     en = "Enable Transparency",
@@ -40,7 +40,7 @@ return {
   },
   [SettingNames.EnableForOtherPlayers] = {
     en = "Enable for other players",
-    ru = "Включить  для других игроков",
+    ru = "Включить для других игроков",
   },
   [SettingNames.OpacityForOthers] = {
     en = "Opacity for other players",
