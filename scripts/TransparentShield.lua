@@ -131,7 +131,7 @@ function mod.update(dt)
     end
 end
 
-mod:hook_safe(CLASS.PlayerUnitWeaponExtension, "on_slot_wielded", function(self, slot_name, t, skip_wield_action)
+mod:hook_safe("PlayerUnitWeaponExtension", "on_slot_wielded", function(self, slot_name, t, skip_wield_action)
     if not is_mod_enabled() or not self._weapons or self._player ~= get_local_player() then return end
 
     local weapon = self._weapons[slot_name]
@@ -142,7 +142,7 @@ mod:hook_safe(CLASS.PlayerUnitWeaponExtension, "on_slot_wielded", function(self,
             end
         elseif slot_name == "slot_primary" then 
             local weapon_name = weapon.weapon_template.name
-            if weapon_name and string.find(string.lower(weapon_name), "slabshield") then
+            if weapon_name and string.find(string.lower(weapon_name), "shield") then
                 last_weapon_unit = weapon.weapon_unit
                 -- set_weapon_fade(last_weapon_unit)
             end
