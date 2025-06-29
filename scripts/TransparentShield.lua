@@ -60,6 +60,7 @@ local function set_weapon_fade(weapon_unit, fade_strength)
     local fade_system = get_fade_system()
     if fade_system then
         fade_strength = fade_strength or get_fade_strength()
+
         if fade_system._unit_to_extension_map[weapon_unit] then
             pcall(fade_system.set_min_fade, fade_system, weapon_unit, fade_strength)
         else
@@ -137,14 +138,13 @@ mod:hook_safe("PlayerUnitWeaponExtension", "on_slot_wielded", function(self, slo
     local weapon = self._weapons[slot_name]
     if weapon and weapon.weapon_template then
         if is_for_all_weapons() then
-            if slot_name == "slot_primary" or slot_name == "slot_secondary" then 
+            if slot_name == "slot_primary" or slot_name == "slot_secondary" then
                 last_weapon_unit = weapon.weapon_unit
             end
-        elseif slot_name == "slot_primary" then 
+        elseif slot_name == "slot_primary" then
             local weapon_name = weapon.weapon_template.name
             if weapon_name and string.find(string.lower(weapon_name), "shield") then
                 last_weapon_unit = weapon.weapon_unit
-                -- set_weapon_fade(last_weapon_unit)
             end
         end
     end
